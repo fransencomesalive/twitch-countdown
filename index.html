@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Clock</title>
+    <link rel="stylesheet" media="screen" href="https://fontlibrary.org//face/segment7" type="text/css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-image: url('clock-image.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .countdown {
+            position: absolute;
+            top: 35%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Segment7Standard', monospace;
+            font-weight: normal;
+            font-size: calc(8vmin + 50px);
+            color: #4dd2ff;
+            letter-spacing: 0.1em;
+            white-space: nowrap;
+        }
+
+        .message {
+            position: absolute;
+            top: 17%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-weight: bold;
+            font-size: calc(2.5vmin + 10px);
+            color: #000080;
+            text-align: center;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.75);
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="countdown" id="countdown">0000.00.00</div>
+    <div class="message">Countdown to TwitchCon</div>
+
+    <script>
+        const targetDate = new Date('2025-12-31T23:59:59').getTime();
+
+        function updateCountdown() {
+            const targetDate = new Date('2025-10-17T09:00:00').getTime();
+            const now = new Date().getTime();
+            const timeLeft = targetDate - now;
+            
+            if (timeLeft > 0) {
+                const hours = Math.floor(timeLeft / (1000 * 60 * 60));
+                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+                
+                document.getElementById('countdown').textContent = 
+                    String(hours).padStart(4, '0') + '.' + 
+                    String(minutes).padStart(2, '0') + '.' + 
+                    String(seconds).padStart(2, '0');
+            } else {
+                document.getElementById('countdown').textContent = '0000.00.00';
+            }
+        }
+
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
